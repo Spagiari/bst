@@ -17,7 +17,7 @@ def test_nooby():
     data.put(2,"B")
 
     for k  in data.get_all_keys():
-        print k, data.get(k)
+        print (k, data.get(k))
 
     assert(data.check())
 
@@ -25,7 +25,7 @@ def test_randon_insert():
     data = bst.BST()
 
     for i in range(0, 100):
-        data.put(random.randint(0, sys.maxint), id_generator(size = 60))
+        data.put(random.randint(0, sys.maxsize), id_generator(size = 60))
 
     assert(data.check())
 

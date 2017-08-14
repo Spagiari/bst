@@ -264,7 +264,7 @@ class BST:
     @staticmethod
     def __get_min(x):
         if x.left == None:
-            print 'min', x
+            print ('min', x)
             return x
         else:
             return BST.__get_min(x.left)
@@ -424,15 +424,15 @@ class BST:
     #######################################################
     def check(self):
         if not self.isBST():
-            print "Not in symmetric order"
+            print ("Not in symmetric order")
         if not self.isSizeConsistent():
-            print "Subtree counts not consistent"
+            print ("Subtree counts not consistent")
         if not self.isRankConsistent():
-            print "Ranks not consistent"
+            print ("Ranks not consistent")
         if not self.is23():
-            print "Not a 2-3 tree"
+            print ("Not a 2-3 tree")
         if not self.isBalanced():
-            print "Not balanced"
+            print ("Not balanced")
         return self.isBST() and self.isSizeConsistent() and \
                 self.isRankConsistent() and self.is23() and \
                 self.isBalanced();
