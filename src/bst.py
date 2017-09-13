@@ -1,13 +1,15 @@
-from collections import deque
-
 RED = True
 BLACK = False
 
 class BST:
     class Node:
-        def __init__(self, key, value, color, size):
+        def __init__(self, key, value, color, size, skey = None):
             self.key = key
-            self.value = value
+            if skey == None:
+                self.value = value
+            else:
+                self.value = dict()
+                self.value[skey] = value
             self.color = color
             self.size = size
             self.left = None
@@ -63,16 +65,19 @@ class BST:
     # Red-black tree insertion
     #######################################
     @staticmethod
-    def __put(h, key, val):
+    def __put(h, key, val, skey = None):
         if h == None:
-            return BST.Node(key, val, RED, 1)
+            return BST.Node(key, val, RED, 1, skey)
 
         if key < h.key:
-            h.left = BST.__put(h.left, key, val)
+            h.left = BST.__put(h.left, key, val, skey)
         elif key > h.key:
-            h.right = BST.__put(h.right, key, val)
+            h.right = BST.__put(h.right, key, val, skey)
         else:
-            h.value = val
+            if skey == None:
+                h.value = val
+            else:
+                h.value[skey] = val
 
         # fix-up
         if BST.__isRed(h.right) and not BST.__isRed(h.left):
@@ -85,13 +90,13 @@ class BST:
 
         return h
 
-    def put(self, key, val):
+    def put(self, key, val, skey = None):
         if key == None:
             raise ValueError
         if val == None:
             self.delete(key)
 
-        self.root = BST.__put(self.root, key, val)
+        self.root = BST.__put(self.root, key, val, skey)
         self.root.color = BLACK
 
     #######################################
@@ -368,7 +373,7 @@ class BST:
     ###############################################
     def get_all_keys(self):
         if self.isEmpty():
-            return deque()
+            return list()
         return self.get_range_keys(self.get_min(), self.get_max())
 
     def get_range_keys(self, lo, hi):
@@ -377,7 +382,7 @@ class BST:
         if hi == None:
             raise ValueError
 
-        q = deque()
+        q = list()
         BST.__get_range_keys(self.root, q, lo, hi)
         return q
 
@@ -395,7 +400,7 @@ class BST:
 ###
     def get_data_all_keys(self):
         if self.isEmpty():
-            return deque()
+            return list()
         return self.get_data_range_keys(self.get_min(), self.get_max())
 
     def get_data_range_keys(self, lo, hi):
@@ -415,7 +420,8 @@ class BST:
         if lo < x.key:
             BST.__get_data_range_keys(x.left, q, lo, hi)
         if lo <= x.key and hi >= x.key:
-            q.append(x.value)
+            for k in x.value:
+                q.append(x.value[k])
         if hi > x.key:
             BST.__get_data_range_keys(x.right, q, lo, hi)
 
