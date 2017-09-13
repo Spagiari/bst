@@ -1,6 +1,6 @@
 from datetime import datetime
 
-EP = datetime(2000,1,1)
+EP = datetime.fromtimestamp(0)
 
 def date_to_float(d):
     if d == None:
@@ -12,3 +12,5 @@ def date_to_float(d):
             DT = datetime.now()
     return (DT - EP).total_seconds()
 
+def float_to_date(fl):
+    return datetime.fromtimestamp(fl).strftime('%Y%m%d%H%M%S.%f0')
