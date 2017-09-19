@@ -18,6 +18,10 @@ def test_get_all_keys():
     with open("../data/material_l.json", "w") as f:
         f.write(json.dumps(data.get_data_all_keys()))
 
+def test_get_keys_ceiling_zero():
+    with open("../data/material_d.json", "w") as f:
+        f.write(json.dumps(data.get_data_range_keys(data.ceiling(0.0),
+                                                   data.get_max())))
 def test_get_keys_ceiling():
     with open("../data/material_d.json", "w") as f:
         f.write(json.dumps(data.get_data_range_keys(data.ceiling(554980170.533),
