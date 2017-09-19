@@ -375,7 +375,7 @@ class BST:
         if hi == None:
             raise ValueError
 
-        q = deque()
+        q = list()
         BST.__get_range_keys(self.root, q, lo, hi)
         return q
 
@@ -393,7 +393,7 @@ class BST:
 ###
     def get_data_all_keys(self):
         if self.isEmpty():
-            return deque()
+            return list()
         return self.get_data_range_keys(self.get_min(), self.get_max())
 
     def get_data_range_keys(self, lo, hi):
