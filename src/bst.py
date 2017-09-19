@@ -1,3 +1,5 @@
+import logging
+
 RED = True
 BLACK = False
 
@@ -159,7 +161,7 @@ class BST:
         if not BST.__isRed(self.root.left) and not BST.__isRed(self.root.right):
             self.root.color = RED
 
-        root = BST.__delete(self.root, key)
+        self.root = BST.__delete(self.root, key)
         if not self.isEmpty():
             self.root.color = BLACK
 
@@ -175,7 +177,7 @@ class BST:
             if key == h.key and h.right == None:
                 return None
             if not BST.__isRed(h.right) and not BST.__isRed(h.right.left):
-                h = move_red_right(h)
+                h = BST.move_red_right(h)
             if key == h.key:
                 x = BST.__get_min(h.right)
                 h.key = x.key
@@ -184,7 +186,7 @@ class BST:
             else:
                 h.right = BST.__delete(h.right, key)
 
-            return BST.balance(h)
+        return BST.balance(h)
 
     ##############################################
     # Red-black tree helper functions
@@ -222,7 +224,7 @@ class BST:
         BST.flip_colors(h)
         if BST.__isRed(h.right.left):
             h.right = BST.rotate_right(h.right)
-            h = BST.rotate_right(h)
+            h = BST.rotate_left(h)
             BST.flip_colors(h)
         return h
 
@@ -404,6 +406,8 @@ class BST:
         return self.get_data_range_keys(self.get_min(), self.get_max())
 
     def get_data_range_keys(self, lo, hi):
+        log = logging.getLogger('BST.get_range_keys')
+        log.info('start')
         if lo == None:
             raise ValueError
         if hi == None:
@@ -411,6 +415,7 @@ class BST:
 
         q = list()
         BST.__get_data_range_keys(self.root, q, lo, hi)
+        log.info('end')
         return q
 
     @staticmethod
