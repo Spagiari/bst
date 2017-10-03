@@ -121,9 +121,9 @@ class BST:
             return None
 
         if not BST.__isRed(h.left) and not BST.__isRed(h.left.left):
-            h = move_red_left(h)
+            h = BST.move_red_left(h)
 
-        h.left = delete_min(h.left)
+        h.left = BST.__delete_min(h.left)
         return BST.balance(h)
 
     def delete_max(self):
