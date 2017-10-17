@@ -271,7 +271,6 @@ class BST:
     @staticmethod
     def __get_min(x):
         if x.left == None:
-            print ('min', x)
             return x
         else:
             return BST.__get_min(x.left)
