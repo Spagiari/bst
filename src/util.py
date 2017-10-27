@@ -14,7 +14,7 @@ def old_date_to_float(d):
     return (DT - EP).total_seconds()
 
 def date_to_float(d):
-    if d == None:
+    if d == None or d = 0.0:
         return (datetime.fromtimestamp(0) - EP).total_seconds()
     return datetime.strptime(d, "%Y%m%d%H%M%S.%f0").timestamp()
 
