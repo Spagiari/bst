@@ -117,7 +117,7 @@ def test_insert_delete_4():
         assert(i == keyso[j])
         j += 1
 
-def test_insert_delete_5():
+def test_get_last():
     data = bst.BST()
     keys = [0, 1, 2, 3, 4, 5 ,6 ,7 , 8, 9, 10]
 
@@ -127,13 +127,8 @@ def test_insert_delete_5():
     data.delete(0)
     assert(data.isBalanced())
 
-    for i in data.get_all_keys():
+    for i in data.get_range_keys(data.ceiling(10), data.get_max()):
         print(i)
-
-    j = 1
-    for i in data.get_all_keys():
-        assert(i == keys[j])
-        j += 1
 
 def test_insert_delete_6():
     data = bst.BST()
