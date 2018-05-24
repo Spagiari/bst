@@ -406,8 +406,11 @@ class BST:
 
     def get_data_range_keys(self, lo, hi):
         log = logging.getLogger('BST.get_range_keys')
-        log.info('start')
         if lo == None:
+            log.info(lo)
+            log.info(hi)
+            log.info(self.get_min())
+            log.info(self.get_max())
             raise ValueError
         if hi == None:
             raise ValueError
